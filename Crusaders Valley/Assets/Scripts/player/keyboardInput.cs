@@ -9,6 +9,7 @@ public class keyboardInput : MonoBehaviour
     public static KeyCode moveDownKey;
     public static KeyCode moveLeftKey;
     public static KeyCode moveRightKey;
+    public static KeyCode useEquippedToolKey;
     void Start()
     {
         moveUpKey = KeyCode.W;
@@ -16,6 +17,7 @@ public class keyboardInput : MonoBehaviour
         moveDownKey = KeyCode.S;
         moveLeftKey = KeyCode.A;
         moveRightKey = KeyCode.D;
+        useEquippedToolKey = KeyCode.Mouse0;
         
     }
 
