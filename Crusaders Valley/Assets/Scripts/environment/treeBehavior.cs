@@ -44,7 +44,7 @@ public class treeBehavior : MonoBehaviour
             else if (treeFalling == true)
                 treeFallingReaction();
         }
-        if (treeHealth <= 0 && treeChopped == true)
+        else if (treeHealth <= 0 && treeChopped == true)
         {
             if (rootsHealth <= 0)
                 Destroy(this.gameObject, 0);
@@ -82,7 +82,7 @@ public class treeBehavior : MonoBehaviour
             {
                 firstTreeSwing = true;
                 choppingTimeElapsed = 0;
-                if (treeHealth <= 0)
+                if (choppedPart.name.Contains("Trunk") && treeHealth <= 0)
                 {
                     treeFalling = true;
                     fallingSpeed = 0;
@@ -97,6 +97,8 @@ public class treeBehavior : MonoBehaviour
             }
             else
             {
+                Debug.Log("je passe ici");
+                choppedPart.transform.localPosition = new Vector3(0, choppedPart.transform.localPosition.y, 0);
                 treeChopped = false;
             }
     }
