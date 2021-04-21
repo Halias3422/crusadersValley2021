@@ -9,8 +9,9 @@ public class treeBehavior : MonoBehaviour
     private int   rootsHealth;
     private bool trunkChoppedOff;
     private float choppingTimeElapsed;
-    private float choppingLerpDuration = 0.05f;
-    private float fallingLerpDuration = 2f;
+    private float choppingLerpDuration;
+    private float fallingTimeElapsed;
+    private float fallingLerpDuration;
     private bool treeChopped;
     private int choppingDirection;
     private bool treeFalling;
@@ -29,6 +30,9 @@ public class treeBehavior : MonoBehaviour
         treeChopped = false;
         treeFalling = false;
         treeFallingAngle = 0;
+        choppingLerpDuration = 0.05f;
+        fallingLerpDuration = 2f;
+        fallingTimeElapsed = 0;
         treeTrunk = gameObject.transform.Find("treeTrunk").gameObject;
         treeRoots = gameObject.transform.Find("treeRoot").gameObject;
         trunkChoppedOff = false;
@@ -39,7 +43,7 @@ public class treeBehavior : MonoBehaviour
     {
         if (trunkChoppedOff == false)
         {
-            if (treeChopped == true)        
+            if (treeChopped == true && treeFalling == false)        
                 treeBeingChoppedReaction(treeTrunk);
             else if (treeFalling == true)
                 treeFallingReaction();
@@ -56,7 +60,7 @@ public class treeBehavior : MonoBehaviour
 
     void    treeFallingReaction()
     {
-        fallingSpeed = Mathf.Lerp(0, 1f, choppingTimeElapsed / fallingLerpDuration);
+        fallingSpeed = Mathf.Lerp(0, 1f, fallingTimeElapsed / fallingLerpDuration);
         treeFallingAngle -= fallingSpeed * choppingDirection;
         treeTrunk.transform.rotation = Quaternion.Euler(0, 0, treeFallingAngle);
         if (treeTrunk.transform.rotation.eulerAngles.z > 0 && ((choppingDirection > 0 && treeTrunk.transform.rotation.eulerAngles.z <= 270) ||
@@ -68,7 +72,7 @@ public class treeBehavior : MonoBehaviour
             trunkChoppedOff = true;
         }
        //treeTrunk.transform.localRotation = Quaternion.Euler(Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, -90), choppingTimeElapsed / fallingLerpDuration));
-       choppingTimeElapsed += Time.deltaTime;
+       fallingTimeElapsed += Time.deltaTime;
     }
 
     void   treeBeingChoppedReaction(GameObject choppedPart)
@@ -90,7 +94,7 @@ public class treeBehavior : MonoBehaviour
                 }
             }
             else if (firstTreeSwing == true && ((choppingDirection > 0 && choppedPart.transform.localPosition.x > 0f) ||
-                    choppingDirection < 0 && choppedPart.transform.localPosition.x < 0f))
+                    (choppingDirection < 0 && choppedPart.transform.localPosition.x < 0f)))
             {
                 choppedPart.transform.localPosition = Vector3.Lerp(new Vector3(0.05f * choppingDirection, choppedPart.transform.localPosition.y, 0), new Vector3(0, choppedPart.transform.localPosition.y, 0), choppingTimeElapsed / choppingLerpDuration);
                 choppingTimeElapsed += Time.deltaTime;

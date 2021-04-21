@@ -18,7 +18,7 @@ public class playerUsingTool : MonoBehaviour
         //tmp
         holdingTool = true;
         //
-        heldTool = transform.Find("choppingAxe").gameObject;
+        heldTool = transform.Find("pickaxe").gameObject;
         toolHitObject = false;
     }
 
@@ -29,7 +29,8 @@ public class playerUsingTool : MonoBehaviour
         {
             checkMousePositionRelativeToPlayer();
             heldTool.GetComponent<PolygonCollider2D>().enabled = true;
-            heldTool.GetComponent<Animator>().Play((heldTool.name + "Swinging" + swingDirection), 0);
+            //heldTool.GetComponent<Animator>().Play((heldTool.name + "Swinging" + swingDirection), 0);
+            heldTool.GetComponent<Animator>().Play(("choppingAxeSwinging" + swingDirection), 0);
         }        
         else if (holdingTool == true && heldTool.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("idleState"))
         {
