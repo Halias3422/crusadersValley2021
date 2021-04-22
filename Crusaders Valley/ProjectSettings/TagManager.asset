@@ -44,6 +44,9 @@ TagManager:
   - name: floor
     uniqueID: 603013789
     locked: 0
+  - name: buildings
+    uniqueID: 4174891049
+    locked: 0
   - name: character
     uniqueID: 703381257
     locked: 0

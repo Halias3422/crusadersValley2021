@@ -18,7 +18,7 @@ public class playerUsingTool : MonoBehaviour
         //tmp
         holdingTool = true;
         //
-        heldTool = transform.Find("pickaxe").gameObject;
+        heldTool = transform.Find("choppingAxe").gameObject;
         toolHitObject = false;
     }
 
@@ -34,10 +34,17 @@ public class playerUsingTool : MonoBehaviour
         }        
         else if (holdingTool == true && heldTool.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("idleState"))
         {
-            heldTool.GetComponent<PolygonCollider2D>().enabled = false;
+            //heldTool.GetComponent<PolygonCollider2D>().enabled = false;
+            disableAllToolsColliders();
             toolHitObject = false;
         }
 
+    }
+
+    void    disableAllToolsColliders()
+    {
+        transform.Find("choppingAxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        transform.Find("pickaxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     void    checkMousePositionRelativeToPlayer()
