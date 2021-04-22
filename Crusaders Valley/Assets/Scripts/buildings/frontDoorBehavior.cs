@@ -18,11 +18,13 @@ public class frontDoorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("doorOpened = " + doorOpened);
         if (getDistanceWithPlayer() > 2f && col.isTrigger == true && GetComponentInParent<buildingBehavior>().playerIsInside == false)
         {
             GetComponentInParent<buildingBehavior>().roof.GetComponent<SpriteRenderer>().enabled = true;
             col.isTrigger = false;
             GetComponent<SpriteRenderer>().enabled = true;
+            doorOpened = false;
         }
         
     }
