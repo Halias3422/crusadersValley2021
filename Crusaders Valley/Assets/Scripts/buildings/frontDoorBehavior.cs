@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class frontDoorBehavior : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class frontDoorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("doorOpened = " + doorOpened);
-        if (getDistanceWithPlayer() > 2f && col.isTrigger == true && GetComponentInParent<buildingBehavior>().playerIsInside == false)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && mouseOveringFrontDoor() == 1)
+            mouseDownOveringFrontDoor();
+        if (getDistanceWithPlayer() > 2f && doorOpened == true && GetComponentInParent<buildingBehavior>().playerIsInside == false)
         {
             GetComponentInParent<buildingBehavior>().roof.GetComponent<SpriteRenderer>().enabled = true;
+            GetComponentInParent<buildingBehavior>().walls.GetComponent<TilemapRenderer>().enabled = true;
+            GetComponentInParent<buildingBehavior>().smallWalls.GetComponent<TilemapRenderer>().enabled = false;
             col.isTrigger = false;
             GetComponent<SpriteRenderer>().enabled = true;
             doorOpened = false;
@@ -29,14 +33,17 @@ public class frontDoorBehavior : MonoBehaviour
         
     }
 
-    private void OnMouseOver() {
-        if (getDistanceWithPlayer() > 2f)
-            keyboardInputScript.cursorActiveTexture = keyboardInputScript.transparentActivatedCursorTexture;
-        else
-            keyboardInputScript.cursorActiveTexture = keyboardInputScript.activatedCursorTexture;
+    int mouseOveringFrontDoor()
+    {
+        foreach (RaycastHit2D col in keyboardInputScript.onMouseOverHits)
+        {
+            if (col.transform.name == transform.name && col.transform.position == transform.position)
+                return (1);
+        }
+        return (0);
     }
 
-    private void OnMouseDown() {
+    private void mouseDownOveringFrontDoor() {
         if (getDistanceWithPlayer() <= 2f)
         {
             if (col.isTrigger == false)
@@ -56,11 +63,8 @@ public class frontDoorBehavior : MonoBehaviour
         }
     }
 
-    float getDistanceWithPlayer()
+    public float getDistanceWithPlayer()
     {
         return (Vector3.Distance(GameObject.Find("player").transform.position, transform.position));
-    }
-    private void OnMouseExit() {
-        keyboardInputScript.cursorActiveTexture = keyboardInputScript.neutralCursorTexture;
     }
 }
