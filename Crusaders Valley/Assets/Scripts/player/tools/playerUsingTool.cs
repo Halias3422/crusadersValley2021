@@ -13,6 +13,7 @@ public class playerUsingTool : MonoBehaviour
     public bool toolHitObject;
     private string swingDirection;
     [SerializeField] public int swingSpeed;
+    private keyboardInput keyboardInputScript;
     void Start()
     {
         //tmp
@@ -20,12 +21,14 @@ public class playerUsingTool : MonoBehaviour
         //
         heldTool = transform.Find("choppingAxe").gameObject;
         toolHitObject = false;
+        keyboardInputScript = GameObject.Find("keyBoardInputManager").GetComponent<keyboardInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (holdingTool == true && Input.GetKey(keyboardInput.useEquippedToolKey) == true)
+        if (holdingTool == true && Input.GetKey(keyboardInput.useEquippedToolKey) == true && (keyboardInputScript.cursorActiveTexture == keyboardInputScript.neutralCursorTexture ||
+        keyboardInputScript.cursorActiveTexture == keyboardInputScript.transparentActivatedCursorTexture))
         {
             checkMousePositionRelativeToPlayer();
             heldTool.GetComponent<PolygonCollider2D>().enabled = true;

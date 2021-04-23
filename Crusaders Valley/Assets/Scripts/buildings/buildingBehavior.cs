@@ -36,8 +36,8 @@ public class buildingBehavior : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name == "player" && GetComponentInChildren<frontDoorBehavior>().doorOpened == true)
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.name == "player" && playerIsInside == false && GetComponentInChildren<frontDoorBehavior>().doorOpened == true)
         {
             walls.GetComponent<TilemapRenderer>().enabled = false;
             smallWalls.GetComponent<TilemapRenderer>().enabled = true;

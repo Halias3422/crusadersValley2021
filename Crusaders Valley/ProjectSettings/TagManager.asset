@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - buildingFrontDoor
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -52,4 +54,7 @@ TagManager:
     locked: 0
   - name: environmentObjects
     uniqueID: 4124355793
+    locked: 0
+  - name: UI
+    uniqueID: 1108465967
     locked: 0

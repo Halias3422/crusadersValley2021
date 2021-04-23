@@ -15,6 +15,7 @@ public class keyboardInput : MonoBehaviour
     [SerializeField] public Texture2D transparentActivatedCursorTexture;
     public Texture2D cursorActiveTexture;
     public RaycastHit2D[] onMouseOverHits;
+    private GameObject player;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class keyboardInput : MonoBehaviour
         moveRightKey = KeyCode.D;
         useEquippedToolKey = KeyCode.Mouse0;
         cursorActiveTexture = neutralCursorTexture;
+        player = GameObject.Find("player");
     }
 
     // Update is called once per frame
@@ -42,9 +44,10 @@ public class keyboardInput : MonoBehaviour
         onMouseOverHits = Physics2D.RaycastAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0f);
         foreach (RaycastHit2D col in onMouseOverHits)
         {
-            if (col.transform.name == "frontDoor")
+            Debug.Log("col = " + col.transform.name);
+            if (col.transform.tag == "buildingFrontDoor" || col.transform.tag == "NPC")
             {
-                if (col.transform.GetComponent<frontDoorBehavior>().getDistanceWithPlayer() > 2f)
+                if (Vector3.Distance(col.transform.position, player.transform.position) > 2f)
                     cursorActiveTexture = transparentActivatedCursorTexture;
                 else
                     cursorActiveTexture = activatedCursorTexture;
