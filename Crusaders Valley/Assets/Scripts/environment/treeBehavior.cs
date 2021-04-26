@@ -71,7 +71,6 @@ public class treeBehavior : MonoBehaviour
             Destroy(treeTrunk, 0);
             trunkChoppedOff = true;
         }
-       //treeTrunk.transform.localRotation = Quaternion.Euler(Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, -90), choppingTimeElapsed / fallingLerpDuration));
        fallingTimeElapsed += Time.deltaTime;
     }
 
@@ -101,7 +100,6 @@ public class treeBehavior : MonoBehaviour
             }
             else
             {
-                Debug.Log("je passe ici");
                 choppedPart.transform.localPosition = new Vector3(0, choppedPart.transform.localPosition.y, 0);
                 treeChopped = false;
             }
@@ -109,13 +107,13 @@ public class treeBehavior : MonoBehaviour
 
 private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.GetComponent<toolAttributes>() && other.gameObject.GetComponent<toolAttributes>().toolType == ("choppingAxe") &&
-            other.gameObject.transform.parent.GetComponent<playerUsingTool>().toolHitObject == false)
+            other.gameObject.transform.parent.transform.parent.GetComponent<playerUsingTool>().toolHitObject == false)
         {
             if (other.gameObject.transform.position.x >= transform.position.x)
                 choppingDirection = -1;
             else
                 choppingDirection = 1;
-               other.gameObject.transform.parent.GetComponent<playerUsingTool>().toolHitObject = true;
+               other.gameObject.transform.parent.transform.parent.GetComponent<playerUsingTool>().toolHitObject = true;
                if (trunkChoppedOff == false)
                 treeHealth -= other.gameObject.GetComponent<toolAttributes>().toolDamage;
                 else

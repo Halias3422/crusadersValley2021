@@ -44,7 +44,6 @@ public class keyboardInput : MonoBehaviour
         onMouseOverHits = Physics2D.RaycastAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0f);
         foreach (RaycastHit2D col in onMouseOverHits)
         {
-            Debug.Log("col = " + col.transform.name);
             if (col.transform.tag == "buildingFrontDoor" || col.transform.tag == "NPC")
             {
                 if (Vector3.Distance(col.transform.position, player.transform.position) > 2f)

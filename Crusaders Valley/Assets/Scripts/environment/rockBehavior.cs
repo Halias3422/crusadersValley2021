@@ -52,13 +52,13 @@ public class rockBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<toolAttributes>() && other.gameObject.GetComponent<toolAttributes>().toolType == ("pickaxe") &&
-        other.gameObject.transform.parent.GetComponent<playerUsingTool>().toolHitObject == false)
+        other.gameObject.transform.parent.transform.parent.GetComponent<playerUsingTool>().toolHitObject == false)
         {
             if (other.gameObject.transform.position.x >= transform.position.x)
                 miningDirection = -1;
             else
                 miningDirection = 1;
-            other.gameObject.transform.parent.GetComponent<playerUsingTool>().toolHitObject = true;
+            other.gameObject.transform.parent.transform.parent.GetComponent<playerUsingTool>().toolHitObject = true;
             rockHealth -= other.gameObject.GetComponent<toolAttributes>().toolDamage;
             miningTimeElapsed = 0;
             firstRockSwing = false;

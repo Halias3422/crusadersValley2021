@@ -19,7 +19,7 @@ public class choppingAxePolygonColliderUpdate : MonoBehaviour
 
     void    setColliderSwingingRight0()
     {
-        this.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
+        this.transform.parent.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
         collid.points = new[]{new Vector2(0, 1), new Vector2(0, 3), new Vector2(1, 2.8f), new Vector2(1.5f, 2.4f)};
     }
     void    setColliderSwingingRight1()
@@ -37,7 +37,7 @@ public class choppingAxePolygonColliderUpdate : MonoBehaviour
 
      void    setColliderSwingingLeft0()
     {
-        this.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
+        this.transform.parent.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
         collid.points = new[]{new Vector2(0, 1), new Vector2(0, 3), new Vector2(-1, 2.8f), new Vector2(-1.5f, 2.4f)};
     }
     void    setColliderSwingingLeft1()
@@ -54,7 +54,7 @@ public class choppingAxePolygonColliderUpdate : MonoBehaviour
     }  
      void    setColliderSwingingDown0()
     {
-        this.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
+        this.transform.parent.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
         collid.points = new[]{new Vector2(0, 1), new Vector2(2, 1), new Vector2(1.85f, 0.2f), new Vector2(1.45f, -0.4f)};
     }
     void    setColliderSwingingDown1()
@@ -71,7 +71,7 @@ public class choppingAxePolygonColliderUpdate : MonoBehaviour
     }  
      void    setColliderSwingingUp0()
     {
-        this.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
+        this.transform.parent.transform.parent.gameObject.GetComponent<playerUsingTool>().toolHitObject = false;
         collid.points = new[]{new Vector2(0, 1), new Vector2(-2, 1), new Vector2(-1.9f, 1.8f), new Vector2(-1.45f, 2.4f)};
     }
     void    setColliderSwingingUp1()

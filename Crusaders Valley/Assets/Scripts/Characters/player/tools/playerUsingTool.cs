@@ -19,7 +19,7 @@ public class playerUsingTool : MonoBehaviour
         //tmp
         holdingTool = true;
         //
-        heldTool = transform.Find("choppingAxe").gameObject;
+        heldTool = transform.Find("tools/pickaxe").gameObject;
         toolHitObject = false;
         keyboardInputScript = GameObject.Find("keyBoardInputManager").GetComponent<keyboardInput>();
     }
@@ -46,8 +46,8 @@ public class playerUsingTool : MonoBehaviour
 
     void    disableAllToolsColliders()
     {
-        transform.Find("choppingAxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-        transform.Find("pickaxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        transform.Find("tools/choppingAxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        transform.Find("tools/pickaxe").gameObject.GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     void    checkMousePositionRelativeToPlayer()
